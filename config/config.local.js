@@ -11,11 +11,11 @@ module.exports = appInfo => {
   // 本地sequelize的配置
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'devpos',
-    host: 'localhost',
+    database: 'devops',
+    host: '115.28.65.42',
     port: '3306',
     username: 'root',
-    password: 'root',
+    password: '123456',
   }
 
   return config
