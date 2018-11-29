@@ -1,21 +1,25 @@
 'use strict'
 
 module.exports = app => {
-  const { STRING, INTEGER, DATE } = app.Sequelize
+  const { STRING, DATE } = app.Sequelize
 
-  const User = app.model.define('user', {
+  const UserBase = app.model.define('user_base', {
     openId: {
       type: STRING(30),
       primaryKey: true,
+      field: 'open_id',
+      comments: '用户的openId',
     },
-    name: STRING(20),
-    sex: INTEGER,
+    nickName: {
+      type: STRING(20),
+      field: 'nick_name',
+    },
     headUrl: {
-      type: STRING,
+      type: STRING(100),
       field: 'head_url',
     },
     startTime: {
-      type: DATE,
+      type: STRING(30),
       field: 'start_time',
     },
     latestTime: {
@@ -27,5 +31,5 @@ module.exports = app => {
     timestamps: false,
   })
 
-  return User
+  return UserBase
 }

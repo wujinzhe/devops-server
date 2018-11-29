@@ -18,5 +18,11 @@ module.exports = appInfo => {
     password: '123456',
   }
 
+  // 微信小程序配置信息
+  config.wx = {
+    appid: 'wxe211b23bf953a522',
+    appSecret: 'e39c0e48f59e8763a70778b837fd4445',
+  }
+
   return config
 }

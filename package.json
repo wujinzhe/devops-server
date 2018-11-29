@@ -4,10 +4,12 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "dayjs": "^1.7.7",
     "egg": "^2.2.1",
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^4.1.0",
-    "mysql2": "^1.6.1"
+    "mysql2": "^1.6.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
