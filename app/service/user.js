@@ -34,6 +34,20 @@ class UserService extends Service {
       latestTime: new Date(),
     })
   }
+
+  /** 【service】更新用户的最后一次登录的时间
+   * @param {String} openid 用户的openid
+   * @return {Object} 修改的结果
+   */
+  async updateUserBaseTime(openid) {
+    return await this.ctx.model.UserBase.update({
+      latestTime: new Date(),
+    }, {
+      where: {
+        openId: openid,
+      },
+    })
+  }
 }
 
 module.exports = UserService

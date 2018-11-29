@@ -44,6 +44,25 @@ class UserController extends Controller {
 
     this.ctx.body = result
   }
+
+  /** 【controller】修改用户最后一次登录的时间 */
+  async updateUserBaseTime() {
+    const openid = this.ctx.request.body.openid
+    console.log('[info][修改用户最后一次登录的时间][请求参数]', openid)
+    const result = {
+      returnCode: 0,
+    }
+
+    try {
+      await this.ctx.service.user.updateUserBaseTime(openid)
+    } catch (err) {
+      console.log('[error][修改用户最后一次登录的时间]', err)
+      result.errMsg = '服务器异常，请稍后重试'
+      result.returnCode = -1
+    }
+
+    this.ctx.body = result
+  }
 }
 
 module.exports = UserController
