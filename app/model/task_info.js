@@ -3,7 +3,7 @@
 module.exports = app => {
   const { STRING, INTEGER, DATE, TEXT } = app.Sequelize
 
-  const TaskInfo = app.model.define('user_base', {
+  const TaskInfo = app.model.define('task_info', {
     taskId: {
       type: INTEGER,
       primaryKey: true,
@@ -30,12 +30,16 @@ module.exports = app => {
     endDate: {
       type: DATE,
       comment: '结束时间',
+      field: 'end_date',
     },
   },
   {
     freezeTableName: true, // 数据库模型的名称和实际数据库名称保持一致
     timestamps: false,
   })
+  TaskInfo.associate = () => {
+    app.model.TaskInfo.hasMany(app.model.TaskUser, { foreignKey: 'task_id', as: 'taskUser' })
+  }
 
   return TaskInfo
 }
