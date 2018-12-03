@@ -19,7 +19,7 @@ module.exports = app => {
       field: 'head_url',
     },
     startTime: {
-      type: STRING(30),
+      type: DATE,
       field: 'start_time',
     },
     latestTime: {

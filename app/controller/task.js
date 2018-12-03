@@ -27,14 +27,60 @@ class TaskController extends Controller {
   }
 
   /**
-   * 为用户初始化任务
+   * 【controller】认领任务
    */
-  async initTaskForUser() {
-    // const { openid } = this.ctx.request.body
-    const list = await this.ctx.service.task.initTaskForUser('1', '3')
+  async claimTask() {
+    const { openid, taskId } = this.ctx.request.body
     const result = {
       returnCode: 0,
-      data: list,
+    }
+
+    try {
+      await this.ctx.service.task.updateTaskStatus(openid, taskId, 1)
+    } catch (err) {
+      console.log('[err][认领任务]', err.message)
+      result.errMsg = '服务器异常，请稍后重试'
+      result.returnCode = -1
+    }
+
+    this.ctx.body = result
+  }
+
+  /**
+   * 【controller】完成任务
+   */
+  async finishTask() {
+    const { openid, taskId } = this.ctx.request.body
+    const result = {
+      returnCode: 0,
+    }
+
+    try {
+      await this.ctx.service.task.updateTaskStatus(openid, taskId, 2)
+    } catch (err) {
+      console.log('[err][完成任务]', err.message)
+      result.errMsg = '服务器异常，请稍后重试'
+      result.returnCode = -1
+    }
+
+    this.ctx.body = result
+  }
+
+  /**
+   * 【controller】领取积分
+   */
+  async receiveIntegral() {
+    const { openid, taskId } = this.ctx.request.body
+    const result = {
+      returnCode: 0,
+    }
+
+    try {
+      await this.ctx.service.task.updataTaskIsReceive(openid, taskId, 1)
+    } catch (err) {
+      console.log('[err][领取积分]', err.message)
+      result.errMsg = '服务器异常，请稍后重试'
+      result.returnCode = -1
     }
 
     this.ctx.body = result

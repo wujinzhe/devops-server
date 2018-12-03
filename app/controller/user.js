@@ -29,13 +29,18 @@ class UserController extends Controller {
    * 【controller】添加基础用户信息
    */
   async addUserBase() {
-    console.log('[info][添加基础用户信息][请求参数]', JSON.stringify(this.ctx.request.body))
     const result = {
       returnCode: 0,
     }
-
+    const data = this.ctx.request.body
+    console.log('[info][添加基础用户信息][请求参数]', JSON.stringify(data))
     try {
-      await this.ctx.service.user.addUserBase(this.ctx.request.body)
+      const isAdd = (await this.ctx.service.user.addUserBase(data))[1]
+      if (isAdd) {
+        await this.ctx.service.task.initTaskForUser(data.openid, '3')
+      } else {
+        result.errMsg = '数据已经存在'
+      }
     } catch (err) {
       console.log('[error][添加基础用户信息]', err.message)
       result.errMsg = '服务器异常，请稍后重试'

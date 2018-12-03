@@ -25,6 +25,11 @@ module.exports = app => {
       field: 'status',
       comment: '当前用户该任务的状态',
     },
+    isReceive: {
+      type: INTEGER,
+      field: 'is_receive',
+      comment: '是否领取了积分 0 未领取 1 已领取',
+    },
   },
   {
     freezeTableName: true, // 数据库模型的名称和实际数据库名称保持一致

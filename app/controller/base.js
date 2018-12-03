@@ -4,7 +4,7 @@ const Controller = require('egg').Controller
 const request = require('request')
 
 class BaseController extends Controller {
-  /** 获取用户的openid */
+  /** 【controller】获取用户的openid */
   async getOpenId() {
     let result // 返回的结果
     const code = this.ctx.request.body.code // 前端传入的临时凭证code
