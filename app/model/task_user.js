@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = app => {
-  const { INTEGER } = app.Sequelize
+  const { INTEGER, STRING } = app.Sequelize
 
   const TaskUser = app.model.define('task_user', {
     id: {
@@ -16,7 +16,7 @@ module.exports = app => {
       comment: '任务id',
     },
     userId: {
-      type: INTEGER,
+      type: STRING(40),
       field: 'user_id',
       comment: '用户id',
     },

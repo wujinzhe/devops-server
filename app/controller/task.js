@@ -12,6 +12,10 @@ class TaskController extends Controller {
       returnCode: 0,
     }
     try {
+      if (!userId || !status) {
+        result.errMsg = '缺少请求参数'
+        throw new Error('缺少请求参数')
+      }
       const data = await this.ctx.service.task.getTaskList(userId, status, pageSize, currentPage)
       data.forEach(item => {
         item.status = item['taskUser.status']

@@ -7,7 +7,7 @@ class UserController extends Controller {
    * 获取用户的基础信息（微信中的头像，昵称等）
    */
   async getUserBaseInfo() {
-    const openid = this.ctx.request.body.openid
+    const { openid } = this.ctx.query
     const result = {
       returnCode: 0,
     }

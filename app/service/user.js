@@ -14,7 +14,7 @@ class UserService extends Service {
         openId: openid,
       },
     })
-    return user && user.dataValues || {}
+    return user && user.dataValues || null
   }
 
 

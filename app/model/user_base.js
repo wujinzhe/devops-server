@@ -5,7 +5,7 @@ module.exports = app => {
 
   const UserBase = app.model.define('user_base', {
     openId: {
-      type: STRING(30),
+      type: STRING(40),
       primaryKey: true,
       field: 'open_id',
       comments: '用户的openId',
