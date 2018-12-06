@@ -25,6 +25,7 @@ class TaskController extends Controller {
     } catch (err) {
       result.returnCode = -1
       result.data = null
+      result.errMsg = '服务器异常，请稍后重试'
       console.log('[error][查询任务列表]', err.message)
     }
 

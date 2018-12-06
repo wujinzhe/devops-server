@@ -25,8 +25,8 @@ class TaskService extends Service {
         },
       ],
       raw: true,
-      offset: (currentPage - 1) * pageSize,
-      limit: pageSize,
+      offset: Number((currentPage - 1) * pageSize),
+      limit: Number(pageSize),
       attributes: [ 'taskId', 'integral', 'title', 'desc', 'endDate' ],
     })
   }
