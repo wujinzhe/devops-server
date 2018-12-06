@@ -7,16 +7,17 @@ class TaskController extends Controller {
    * 获取任务列表
    */
   async getTaskList() {
-    const { userId, status, pageSize, currentPage } = this.ctx.request.body
+    const { openid, status, pageSize, currentPage } = this.ctx.query
     const result = {
       returnCode: 0,
     }
+    console.log('[info][获取任务列表][请求参数]', this.ctx.query)
     try {
-      if (!userId || !status) {
+      if (!openid || status === undefined) {
         result.errMsg = '缺少请求参数'
         throw new Error('缺少请求参数')
       }
-      const data = await this.ctx.service.task.getTaskList(userId, status, pageSize, currentPage)
+      const data = await this.ctx.service.task.getTaskList(openid, status, pageSize, currentPage)
       data.forEach(item => {
         item.status = item['taskUser.status']
       })
