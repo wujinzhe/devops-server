@@ -38,6 +38,10 @@ class UserController extends Controller {
       const isAdd = (await this.ctx.service.user.addUserBase(data))[1]
       if (isAdd) {
         await this.ctx.service.task.initTaskForUser(data.openid, '3')
+        await this.ctx.service.user.addUserInfo({
+          openId: data.openid,
+          nickName: data.nickName,
+        })
       } else {
         result.errMsg = '数据已经存在'
       }

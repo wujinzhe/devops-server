@@ -38,6 +38,23 @@ class UserService extends Service {
     })
   }
 
+  /**
+   * 【service】添加用户信息
+   * @param {Object} userInfo 用户信息对象
+   * @return {Promise} 添加成功后返回的数据
+   */
+  addUserInfo(userInfo) {
+    return this.ctx.model.UserInfo.findCreateFind({
+      where: {
+        openId: userInfo.openId,
+      },
+      defaults: {
+        openId: userInfo.openId,
+        nickName: userInfo.nickName,
+      },
+    })
+  }
+
   /** 【service】更新用户的最后一次进入的时间
    * @param {String} openid 用户的openid
    * @return {Object} 修改的结果

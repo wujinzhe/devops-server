@@ -21,7 +21,7 @@ class TaskService extends Service {
             userId: openid,
             status,
           },
-          attributes: [ 'status' ],
+          attributes: [ 'id', 'status', 'isReceive' ],
         },
       ],
       raw: true,

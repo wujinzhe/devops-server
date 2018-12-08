@@ -20,6 +20,8 @@ class TaskController extends Controller {
       const data = await this.ctx.service.task.getTaskList(openid, status, pageSize, currentPage)
       data.forEach(item => {
         item.status = item['taskUser.status']
+        item.id = item['taskUser.id']
+        item.isReceive = item['taskUser.isReceive']
       })
       result.data = data
     } catch (err) {
