@@ -72,6 +72,66 @@ class UserController extends Controller {
 
     this.ctx.body = result
   }
+
+  /**
+   * 【controller】更新用户信息
+   */
+  async updateUserInfo() {
+    const result = {
+      returnCode: 0,
+    }
+    try {
+      await this.ctx.service.user.updateUserInfo(this.ctx.request.body)
+    } catch (err) {
+      console.log('[error][更新用户信息]', err.message)
+      result.errMsg = '服务器错误，请稍后重试'
+      result.returnCode = -1
+    }
+
+    this.ctx.service.task.updateTaskStatus(this.ctx.request.body.openId, 1, 2)
+    this.ctx.service.task.updateTaskStatus(this.ctx.request.body.openId, 3, 2)
+
+    this.ctx.body = result
+  }
+
+  /**
+   * 【controller】获取用户信息
+   */
+  async getUserInfo() {
+    const { openId } = this.ctx.query
+    const result = {
+      returnCode: 0,
+    }
+    try {
+      result.data = await this.ctx.service.user.getUserInfo(openId)
+    } catch (err) {
+      console.log('[error][获取用户信息]', err.message)
+      result.errMsg = '服务器错误，请稍后重试'
+      result.returnCode = -1
+    }
+
+    this.ctx.body = result
+  }
+
+  /**
+ * 【controller】获取用户的dev信息
+ */
+  async getUserDevopsInfo() {
+    const { openId } = this.ctx.query
+    const result = {
+      returnCode: 0,
+    }
+
+    try {
+      result.data = (await this.ctx.service.user.getUserDevopsInfo(openId))[0]
+    } catch (err) {
+      console.log('[error][获取用户的dev信息]')
+      result.errM = '服务器异常，请稍后重试'
+      result.returnCode = -1
+    }
+
+    this.ctx.body = result
+  }
 }
 
 module.exports = UserController

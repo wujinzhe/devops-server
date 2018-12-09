@@ -50,7 +50,7 @@ class TaskService extends Service {
       fieldList.push({
         taskId: item.taskId,
         userId: openid,
-        status: 0,
+        status: 1,
         isReceive: 0,
       })
     })

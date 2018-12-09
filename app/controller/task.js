@@ -55,7 +55,7 @@ class TaskController extends Controller {
   }
 
   /**
-   * 【controller】完成任务
+   * 【controller】完成任务 暂未用到
    */
   async finishTask() {
     const { openid, taskId } = this.ctx.request.body
@@ -71,6 +71,8 @@ class TaskController extends Controller {
       result.returnCode = -1
     }
 
+    this.ctx.service.task.updateTaskStatus(openid, 3, 2)
+
     this.ctx.body = result
   }
 
@@ -78,13 +80,14 @@ class TaskController extends Controller {
    * 【controller】领取积分
    */
   async receiveIntegral() {
-    const { openid, taskId } = this.ctx.request.body
+    const { openid, taskId, integral } = this.ctx.request.body
     const result = {
       returnCode: 0,
     }
 
     try {
       await this.ctx.service.task.updataTaskIsReceive(openid, taskId, 1)
+      await this.ctx.service.integral.updateScore(openid, integral)
     } catch (err) {
       console.log('[err][领取积分]', err.message)
       result.errMsg = '服务器异常，请稍后重试'

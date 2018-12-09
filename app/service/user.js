@@ -39,7 +39,7 @@ class UserService extends Service {
   }
 
   /**
-   * 【service】添加用户信息
+   * 【service】添加用户信息 (第一次用户进入时调用)
    * @param {Object} userInfo 用户信息对象
    * @return {Promise} 添加成功后返回的数据
    */
@@ -55,6 +55,34 @@ class UserService extends Service {
     })
   }
 
+  /**
+   * 【service】更新用户信息
+   * @param {Object} userInfo 更新的对象
+   * @return {Promise} 返回的对象
+   */
+  updateUserInfo(userInfo) {
+    return this.ctx.model.UserInfo.update(userInfo,
+      {
+        where: {
+          openId: userInfo.openId,
+        },
+      })
+  }
+
+  /**
+   * 【service】获取用户的信息
+   * @param {String} openId 用户id
+   * @return {Promise} 返回的查询对象
+   *
+  */
+  getUserInfo(openId) {
+    return this.ctx.model.UserInfo.findOne({
+      where: {
+        openId,
+      },
+    })
+  }
+
   /** 【service】更新用户的最后一次进入的时间
    * @param {String} openid 用户的openid
    * @return {Object} 修改的结果
@@ -65,6 +93,23 @@ class UserService extends Service {
     }, {
       where: {
         openId: openid,
+      },
+    })
+  }
+
+  /**
+   * 【service】获取用户的devops信息
+   * @param {String} openId 用户id
+   * @return {promise} 返回信息
+   */
+  getUserDevopsInfo(openId) {
+    return this.ctx.model.UserDevopsInfo.findCreateFind({
+      where: {
+        openId,
+      },
+      defaults: {
+        openId,
+        integral: 0,
       },
     })
   }

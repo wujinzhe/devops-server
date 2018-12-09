@@ -20,10 +20,10 @@ module.exports = appInfo => {
 
   // 微信小程序配置信息
   config.wx = {
-    appid: 'wxe211b23bf953a522',
-    appSecret: 'e39c0e48f59e8763a70778b837fd4445',
-    // appid: 'wx4993b00849ef721c',
-    // appSecret: 'c31230c95767f5e2c9c40667e2f1dd65',
+    // appid: 'wxe211b23bf953a522',
+    // appSecret: 'e39c0e48f59e8763a70778b837fd4445',
+    appid: 'wx4993b00849ef721c',
+    appSecret: 'c31230c95767f5e2c9c40667e2f1dd65',
   }
 
   return config
