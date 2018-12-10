@@ -25,9 +25,11 @@ class IntegralService extends Service {
    */
   getIntegralList(openId, currentPage = 1, pageSize = 6) {
     return this.ctx.model.Integral.findAll({
-      openId,
-      currentPage,
-      pageSize,
+      where: {
+        openId,
+      },
+      offset: Number((currentPage - 1) * pageSize),
+      limit: Number(pageSize),
     })
   }
 

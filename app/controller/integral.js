@@ -32,18 +32,20 @@ class integralController extends Controller {
 
   /** 【controller】获取积分列表 */
   async getIntegralList() {
-    const { openId, currentPage, pageSize } = this.ctx.request.body
+    const { openId, currentPage, pageSize } = this.ctx.query
+    console.log('[info][获取积分列表][请求参数]', this.ctx.query)
     const result = {
       returnCode: 0,
     }
 
     try {
-      result.data = await this.ctx.service.integral.getIntegralList({
+      result.data = await this.ctx.service.integral.getIntegralList(
         openId,
         currentPage,
-        pageSize,
-      })
+        pageSize
+      )
     } catch (err) {
+      console.log('[error][获取积分列表]', err)
       result.errMsg = '服务器异常，请稍后重试'
       result.returnCode = -1
     }
